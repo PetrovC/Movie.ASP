@@ -1,8 +1,21 @@
-﻿
+﻿<link rel="stylesheet" href="~/css/HomeStyle.css" />
 @{
     ViewData["Title"] = "Home Sweet Home";
 }
-
-<h1>Home Sweet Home</h1>
-
-<img src="http://3.bp.blogspot.com/-Aw7qbObHjJc/UaI48wy_m6I/AAAAAAAABAI/7hqAPdd3eto/s1600/home+sweet+home-01.jpg" alt="Home Sweet Home" />
+@section MyHome {
+    <div id="Main">
+        <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+            <ul class="navbar-nav flex-grow-1">
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Movie" asp-action="Index">Movie</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Category" asp-action="Index">Category</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+}
+<div class="divhome">
+    <img src="http://3.bp.blogspot.com/-Aw7qbObHjJc/UaI48wy_m6I/AAAAAAAABAI/7hqAPdd3eto/s1600/home+sweet+home-01.jpg" alt="Home Sweet Home" />
+</div>
