@@ -10,5 +10,6 @@ namespace MovieProject.DAL.Services
         List<Category> Get();
         Category GetById(int id);
         void Update(Category c);
+        List<Movie> GetFilmByCategory(int id);
     }
 }

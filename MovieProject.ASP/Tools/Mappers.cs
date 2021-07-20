@@ -1,5 +1,6 @@
 ﻿using MovieProject.ASP.Models;
 using MovieProject.DAL.Entities;
+using System.Collections.Generic;
 
 namespace MovieProject.ASP.Tools
 {
@@ -59,7 +60,7 @@ namespace MovieProject.ASP.Tools
             return new CategoryModel
             {
                 Id = c.Id,
-                Name = c.Name
+                Name = c.Name,
             };
         }
         public static Category ToCategoryDAL(this CategoryModel c)
@@ -69,6 +70,24 @@ namespace MovieProject.ASP.Tools
                 Id = c.Id,
                 Name = c.Name
             };
+        }
+        public static List<MovieModel> ToListModel(this List<Movie> l)
+        {
+            List<MovieModel> m = new List<MovieModel>();
+            if (l !=null)
+            {
+                for (int i = 0; i < l.Count; i++)
+                {
+                    m.Add(new MovieModel
+                    {
+                        Id = l[i].Id,
+                        Title = l[i].Title,
+                        Poster = l[i].Poster,
+                        CategoryName = l[i].Category?.Name,
+                    });
+                }
+            }
+            return m;
         }
     }
 }

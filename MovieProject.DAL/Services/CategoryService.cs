@@ -207,6 +207,48 @@ namespace MovieProject.DAL.Services
             catch (Exception) { throw; }
             finally { _conn.Close(); }
         }
+        public List<Movie> GetFilmByCategory(int id) // jointure
+        {
+            try
+            {
+                _conn.Open();
+                IDbCommand command = _conn.CreateCommand();
+                command.CommandText = @"
+                    SELECT M.*, C.[Name] CategoryName  
+                    FROM Movie M
+                    JOIN Category C ON M.CategoryId = C.Id
+                    WHERE CategoryId = @id
+                ";
+                var parameter1 = command.CreateParameter();
+                parameter1.ParameterName = "id";
+                parameter1.Value = id;
+                command.Parameters.Add(parameter1);
+                IDataReader reader = command.ExecuteReader();
+                List<Movie> lm = new List<Movie>();
+                while (reader.Read())
+                {
+                    Movie movie = new Movie();
+                    movie.Id = (int)reader["Id"];
+                    movie.Title = (string)reader["Title"];
+                    movie.Poster = reader["Poster"] as string;
+                    movie.Duration = reader["Duration"] as TimeSpan?;
+                    movie.CategoryId = reader["CategoryId"] as int?;
+                    movie.BoxOffice = (decimal)reader["BoxOffice"];
+                    if (movie.CategoryId != null)
+                    {
+                        movie.Category = new Category
+                        {
+                            Id = (int)reader["CategoryId"],
+                            Name = (string)reader["CategoryName"]
+                        };
+                    }
+                    lm.Add(movie);
+                }
+                return lm;
+            }
+            catch (Exception) { throw; }
+            finally { _conn.Close(); }
+        }
     } 
     #endregion
 }

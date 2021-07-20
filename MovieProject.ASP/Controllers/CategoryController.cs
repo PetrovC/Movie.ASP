@@ -55,5 +55,12 @@ namespace MovieProject.ASP.Controllers
             _catService.Delete(c.Id);
             return RedirectToAction("Index");
         }
+        public IActionResult Details(int id)
+        {
+            CategoryModel c = new CategoryModel();
+            c = _catService.GetById(id).ToCategoryFromDAL();
+            c.Movies = _catService.GetFilmByCategory(id).ToListModel();
+            return View(c);
+        }
     }
 }

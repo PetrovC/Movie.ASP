@@ -1,0 +1,34 @@
+﻿@model CategoryModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>@Model.Name</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Titre
+            </th>
+            <th>
+                Image
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Movies)
+        {
+            <tr>
+                <td>
+                    @item.Title
+                </td>
+                <td>
+                    <img width="200" src="@item.Poster" />
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
